@@ -6,16 +6,17 @@ class User extends CI_controller
 	{
 		parent::__construct();
 		$this->load->model(array("m_user"));
+
 	}
 
 	function index()
 	{
-		$this->load->view("view_register");
+		$this->load->view("register");
 	}
 
 	function login()
 	{
-		$this->load->view("view_login");
+		$this->load->view("login");
 	}
 
 	function reg_action()
@@ -48,16 +49,16 @@ class User extends CI_controller
 		$this->load->library('email');
 		
 		$config["protocol"] = 'smtp';
-		$config["smtp_host"] = 'ssl://smtp.gmail.com';
+		$config["smtp_host"] = 'ssl://smtp.googlemail.com';
 		$config["smtp_port"] = '465';
-		$config["smtp_timeout"] = '30';
-		$config["smtp_user"] = "luthfinoviandi@gmail.com";
-		$config["smtp_pass"] = "muteparamore";
+		$config["smtp_timeout"] = '40';
+		$config["smtp_user"] = "fortestmutia@gmail.com";
+		$config["smtp_pass"] = "fortest123";
 		$config["charset"] = "utf-8";
 
 		$this->email->initialize($config);
 
-		$this->email->from('luthfinoviandi@gmail.com', 'Mutia Hafilizara');
+		$this->email->from('fortestmutia@gmail.com', 'Mutia Hafilizara');
 		$this->email->to($reg["email"]);
 		
 		$this->email->subject('Login Information');
@@ -66,6 +67,34 @@ class User extends CI_controller
 		$this->email->send();
 		
 		echo $this->email->print_debugger();		
-		//redirect("user/login");
+		redirect("user/login");
 	}
+	
+	function login_action()
+	{
+		$username=$this->input->post("username");
+		$password=$this->input->post("password");
+
+		$row = $this->m_user->getRow($username)->row();
+		$passw=$row->password;
+
+
+		if(md5($password)==$passw)
+		{
+			redirect("user/home");
+		}
+		else
+		{
+			redirect("user/login");
+		}
+
+	}
+
+	function home()
+	{
+		$this->load->view("contoh");	
+	}
+
+
+
 }

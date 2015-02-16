@@ -8,6 +8,17 @@ class M_user extends CI_model
 		return $this->db->get("register_table");
 	}
 
+	function getRow($username)
+	{
+		$this->db->where("username",$username);
+		return $this->db->get("login_table");
+	}
+
+	function getAll1()
+	{
+		return $this->db->get("user");
+	}
+
 	function getAll()
 	{
 		return $this->db->get("register_table");

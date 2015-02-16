@@ -1,0 +1,46 @@
+.registerbox
+{
+	margin-top: -80px;
+}	
+
+.loginbox
+{
+	margin-top: -80px;
+}	
+
+.mylogo{
+	margin-top: 10px;
+	margin-left: 300px;
+	width:100px;
+	height:100px;
+}
+
+.mylogologin{
+	margin-top: 10px;
+	margin-left: 650px;
+	width:100px;
+	height:100px;
+}
+
+.copyright
+{
+	margin-left: 300px;
+	margin-top: 90px;
+}
+
+.uppertext
+{
+	margin-top: 30px;
+	margin-left: 5px;
+
+}
+.belowtext
+{
+	margin-top: 40px;
+	margin-left:200px;
+}
+.thevideo
+{
+	margin-top: 30px;
+	margin-left: 300px;
+}
