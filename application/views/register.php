@@ -10,7 +10,60 @@
         <link  rel="stylesheet" type="text/css" href="<?PHP echo base_url();?>assets/css/font-awesome.min.css"/>
         <link  rel="stylesheet" type="text/css" href="<?PHP echo base_url();?>assets/css/AdminLTE.css"/>
         <link  rel="stylesheet" type="text/css" href="<?PHP echo base_url();?>assets/css//theme/mutia.css"/>
+        <script src="<?PHP echo base_url();?>assets/jquery.min.js"></script>
 
+        <!-- Bootstrap -->
+        <script type="text/javascript" src="<?PHP echo base_url();?>assets/js/bootstrap.min.js" ></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                /// make loader hidden in start
+                /*$('#Loading').hide();    
+             
+                $('#email').blur(function(){
+                var a = $("#email").val();
+                var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+                   // check if email is valid
+                if(filter.test(a)){
+                            // show loader
+                    $('#Loading').show();
+                    $.post("<?php echo base_url()?>user/check_email_availablity", {
+                        email: $('#email').val()
+                    }, function(response){
+                                    //#emailInfo is a span which will show you message
+                        $('#Loading').hide();
+                        setTimeout("finishAjax('Loading', '"+escape(response)+"')", 400);
+                    });
+                    return false;
+                }*/
+                $('#email').on('blur',function (){
+                   
+                    $.ajax({
+                    type: "POST",
+                    data: "email="+$(this).val(),
+                    url: "<?php echo base_url() ?>user/check_email_availablity/",
+                    //beforeSend: function(){
+                    //emailInfo.html(“Checking Email…”); //show checking or loading image
+                    success: function(data){
+                    if(data == "1")
+                    {
+                        alert("email ok");
+                    }
+                    else if(data == "0")
+                    {
+                        alert("email has been registered");
+                    }
+                    },
+                });
+            });
+                    //alert($(this).val());
+
+            function finishAjax(id, response){
+              $('#'+id).html(unescape(response));
+              $('#'+id).fadeIn();
+            } 
+
+        });
+        </script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -61,7 +114,7 @@
             <div class="registerbox">
                 <div class="form-box" id="login-box">
                     <div class="header">Get your 30 day free trial</div>
-                        <form action="<?php echo base_url()?>user/reg_action" method="post">
+                        <form action="<?php echo base_url()?>user/reg_action" method="post" id="regForm">
                             <div class="body bg-gray">
                                 <div class="form-group">
                                     <input type="text" name="surname" class="form-control" placeholder="Surname" required/>
@@ -73,7 +126,7 @@
                                     <input type="text" name="username" class="form-control" placeholder="User Name" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Email"  required/>
+                                    <input type="text" id="email" name="email" class="form-control" placeholder="Email"  required/>
                                 </div>
                                 <div class="form-group">
                                             <select class="form-control" name="title" required/>
@@ -110,10 +163,6 @@
     </div>
      -->
         <!-- jQuery 2.0.2 -->
-        <script src="<?PHP echo base_url();?>assets/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <script type="text/javascript" src="<?PHP echo base_url();?>assets/js/bootstrap.min.js" ></script>
         
-
     </body>
 </html>

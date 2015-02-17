@@ -95,6 +95,24 @@ class User extends CI_controller
 		$this->load->view("contoh");	
 	}
 
+	function email_check($email)
+	{
+
+		$this->db->where('email', $email);
+		$query = $this->db->get('register_table');
+		if( $query->num_rows() > 0 ){ return TRUE; } else { return FALSE; } 
+	}
+
+	function check_email_availablity()
+	{
+	    $get_result = $this->email_check($this->input->post("email"));
+	    
+	    if(!$get_result )
+	    echo '1';
+	    else
+	    echo '0';
+	}
+
 
 
 }
